@@ -13,7 +13,7 @@ spring:
             - Path=/videos/**
         - id: VIDEO-RECOMMENDATION-SERVICE
           uri: lb://VIDEO-RECOMMENDATION-SERVICE
-          predicaties:
+          predicates:
             - Path=/video-recommendations/**
 
 eureka:
