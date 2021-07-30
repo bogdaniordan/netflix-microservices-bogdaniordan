@@ -15,8 +15,8 @@ class VideoService {
         return axios.post(`${VIDEO_URL_API}/add-recommendation/${videoId}`, recommendation)
     }
 
-    updateComment(commentId, updatedComment) {
-        return axios.put(`${VIDEO_URL_API}/update-recommendation/${commentId}`, updatedComment);
+    updateRecommendation(recommendationId, updateRecommendation) {
+        return axios.put(`${VIDEO_URL_API}/update-recommendation/${recommendationId}`, updateRecommendation);
     }
 
     getRecommendationById(id) {

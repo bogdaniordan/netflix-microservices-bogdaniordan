@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import VideoService from "../service/VideoService";
 import ReactStars from "react-rating-stars-component";
 import {Button} from "react-bootstrap";
+import {LocalDate} from "@js-joda/core";
 
 const UpdateRecommendationComponent = (props) => {
     const id = props.match.params.id;
@@ -30,7 +31,16 @@ const UpdateRecommendationComponent = (props) => {
     }
 
     const updateRecommendation = () => {
+        const updatedRecommendation = {
+            rating: rating,
+            comment: newComment,
+            videoId: recommendation.videoId,
+            date: LocalDate.now().toString()
+        }
 
+        VideoService.updateRecommendation(id, updatedRecommendation).then(r => {
+            console.log(updatedRecommendation)
+        })
     }
 
     if (!isLoading) {
