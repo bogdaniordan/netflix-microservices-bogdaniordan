@@ -1,27 +1,40 @@
 import React, {useEffect, useState} from 'react';
 import NavbarComponent from "./NavbarComponent";
+import VideoService from "../service/VideoService";
+import VideoCardComponent from "./VideoCardComponent";
 
 const VideosComponent = () => {
     const [videos, setVideos] = useState([]);
     const [isLoading, setLoading] = useState(false);
 
     useEffect(() => {
-
+        setLoading(true);
+        VideoService.getAllVideos().then(r => {
+            setVideos(r.data);
+            console.log(r.data)
+            // console.log(videos)
+            setLoading(false);
+        })
     },[])
-    return (
-        <div>
-            <NavbarComponent />
-            <div className="card" style={{width: "18rem;"}}>
-                <video src="https://codingyaar.com/wp-content/uploads/video-in-bootstrap-card.mp4" controls/>
-                <div className="card-body">
-                    <h5 className="card-title">Card title</h5>
-                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of
-                        the card's content.</p>
-                    <a href="#" className="btn btn-primary">Go somewhere</a>
-                </div>
+
+    if (!isLoading) {
+        return (
+            <div>
+                <NavbarComponent />
+                {
+                    videos.map(
+                        video => <VideoCardComponent data={video}/>
+                    )
+                }
             </div>
-        </div>
-    );
+        );
+    } else {
+        return (<div><h3>Loading...</h3></div>)
+    }
+
+    // return (<div><h3>Loading...</h3></div>)
+
+
 };
 
 export default VideosComponent;

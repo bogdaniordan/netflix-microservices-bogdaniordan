@@ -15,7 +15,7 @@ const NavbarComponent = () => {
                     {/*    <Nav.Link href="#pricing">Pricing</Nav.Link>*/}
                     {/*</Nav>*/}
 
-                    <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+                    {/*<Navbar.Brand href="#home">Navbar</Navbar.Brand>*/}
 
                 </Container>
             </Navbar>
