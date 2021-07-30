@@ -1,9 +1,6 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 
 const VideoCardComponent = (props) => {
-    useEffect(() => {
-        console.log(props.data)
-    }, [])
     return (
         <div>
             <div className="card" style={{width: "18rem;"}}>
@@ -17,8 +14,8 @@ const VideoCardComponent = (props) => {
                     title="Embedded youtube"
                 />
                 <div className="card-body">
-                    <h5 className="card-title">{props.data.name}</h5>
-                    <a href={"/video/" + props.data.id} className="btn btn-primary">View details</a>
+                    <h5 className="card-title"><a href={"/video/" + props.data.id} >{props.data.name}</a></h5>
+                    {/*<a href={"/video/" + props.data.id} className="btn btn-primary">View details</a>*/}
                 </div>
             </div>
         </div>

@@ -11,8 +11,6 @@ const VideosComponent = () => {
         setLoading(true);
         VideoService.getAllVideos().then(r => {
             setVideos(r.data);
-            console.log(r.data)
-            // console.log(videos)
             setLoading(false);
         })
     },[])
@@ -31,10 +29,6 @@ const VideosComponent = () => {
     } else {
         return (<div><h3>Loading...</h3></div>)
     }
-
-    // return (<div><h3>Loading...</h3></div>)
-
-
 };
 
 export default VideosComponent;
