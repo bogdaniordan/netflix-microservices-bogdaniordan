@@ -10,6 +10,10 @@ class VideoService {
     getVideoWithRecommendations(id) {
         return axios.get(`${VIDEO_URL_API}/${id}`)
     }
+
+    addRecommendation(videoId, recommendation) {
+        return axios.post(`${VIDEO_URL_API}/add-recommendation/${videoId}`, recommendation)
+    }
 }
 
 
