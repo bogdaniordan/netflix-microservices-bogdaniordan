@@ -3,7 +3,6 @@ import VideoService from "../service/VideoService";
 import {ListGroup} from "react-bootstrap";
 import ReactStars from "react-rating-stars-component";
 import {Button} from "react-bootstrap";
-import axios from "axios";
 import {LocalDate} from "@js-joda/core";
 
 
@@ -17,9 +16,7 @@ const VideoDetailsComponent = (props) => {
 
     useEffect(() => {
         VideoService.getVideoWithRecommendations(id).then(r => {
-            // console.log(r.data)
             setVideo(r.data.video);
-            // console.log(r.data.videoRecommendations)
             setRecommendations(r.data.videoRecommendations)
             setLoading(false);
         })
@@ -35,7 +32,6 @@ const VideoDetailsComponent = (props) => {
     }
 
     const addRecommendation = () => {
-        const localDate = LocalDate.now();
         const recommendation = {
             rating: rating,
             comment: newComment,
@@ -67,7 +63,7 @@ const VideoDetailsComponent = (props) => {
                     {recommendations.map((rec, i) => (
                         <ListGroup.Item key={i} variant="info" className={"d-inline mb-2"}>
                             <ListGroup horizontal className={'justify-content-center'}>
-                                <ListGroup.Item variant={"info"}>{rec.comment}</ListGroup.Item>
+                                <ListGroup.Item variant={"info"}><a href={"/update-recommendation/" + rec.id}>{rec.comment}</a></ListGroup.Item>
                                 <ListGroup.Item variant={"info"}>{rec.date}</ListGroup.Item>
                                 <ListGroup.Item variant={"info"} className={''}>
                                     <ReactStars
