@@ -1,4 +1,4 @@
-package com.codecool.cloudgateway;
+package com.codecool.cloudgateway.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
