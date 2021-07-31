@@ -13,17 +13,15 @@ const UpdateRecommendationComponent = (props) => {
 
     useEffect(() => {
         VideoService.getRecommendationById(id).then(res => {
-            console.log(res.data)
             setRecommendation(res.data)
             setLoading(false);
         })
-
     },[])
 
 
     const getComment = (event) => {
         setNewComment(event.target.value);
-        event.target.value = "";
+        // event.target.value = "";
     }
 
     const getRating = (newRating) => {
@@ -40,6 +38,7 @@ const UpdateRecommendationComponent = (props) => {
 
         VideoService.updateRecommendation(id, updatedRecommendation).then(r => {
             console.log(updatedRecommendation)
+            props.history.push("/videos");
         })
     }
 
