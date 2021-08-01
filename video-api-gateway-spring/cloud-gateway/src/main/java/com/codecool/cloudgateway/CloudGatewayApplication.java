@@ -1,5 +1,6 @@
 package com.codecool.cloudgateway;
 
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import com.codecool.cloudgateway.model.DbUser;
 import com.codecool.cloudgateway.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -24,7 +25,11 @@ public class CloudGatewayApplication {
 	@Bean
 	CommandLineRunner initDatabase(UserRepository userRepository) {
 		return args -> {
-			userRepository.save(new DbUser(1L, "bogdan", "ilovejs", List.of("ROLE_USER", "ADMIN_USER")));
+			DbUser dbUser = DbUser.builder().id(1L)
+							.username("bogdan").password(BCrypt.hashpw("ilovejs", BCrypt.gensalt(12)))
+					.roles(List.of("ROLE_USER")).build();
+			userRepository.save(dbUser);
+//			userRepository.save(new DbUser(1L, "bogdan", (BCrypt.hashpw("ilovejs"), BCrypt.gensalt(12)), List.of("ROLE_USER", "ADMIN_USER")));
 		};
 	}
 
