@@ -17,12 +17,12 @@ import java.util.List;
 public class DbUser {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
+    private Long id;
     private String username;
     private String password;
 
     // roles of the user (ADMIN, USER,..)
-    @ElementCollection(fetch = FetchType.EAGER)
+    @ElementCollection
     @Builder.Default
     private List<String> roles = new ArrayList<>();
 }
