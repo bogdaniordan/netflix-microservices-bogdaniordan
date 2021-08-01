@@ -2,6 +2,7 @@ package com.codecool.cloudgateway.controller;
 
 import com.codecool.cloudgateway.model.DbUser;
 import com.codecool.cloudgateway.model.UserCredentials;
+import com.codecool.cloudgateway.model.UserCredentialsResponse;
 import com.codecool.cloudgateway.repository.UserRepository;
 import com.codecool.cloudgateway.security.JwtTokenServices;
 import lombok.extern.slf4j.Slf4j;
@@ -52,7 +53,7 @@ public class DbUserController {
     }
 
     @PostMapping("/sign-in")
-    public ResponseEntity<Map<Object, Object>> signIn(@RequestBody DbUser data) {
+    public ResponseEntity<UserCredentialsResponse> signIn(@RequestBody DbUser data) {
         try {
             String username = data.getUsername();
             // authenticationManager.authenticate calls loadUserByUsername in CustomUserDetailsService
@@ -64,14 +65,11 @@ public class DbUserController {
 
             String token = jwtTokenServices.createToken(username, roles);
 
-            Map<Object, Object> model = new HashMap<>();
-            model.put("username", username);
-            model.put("roles", roles);
-            model.put("token", token);
+            UserCredentialsResponse userCredentialsResponse = new UserCredentialsResponse(username, token, roles);
 
-            System.out.println(model);
+            System.out.println(userCredentialsResponse);
 
-            return ResponseEntity.ok(model);
+            return ResponseEntity.ok(userCredentialsResponse);
         } catch (AuthenticationException e) {
             throw new BadCredentialsException("Invalid username/password supplied");
         }
