@@ -16,19 +16,17 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Slf4j
+@CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/auth")
 public class DbUserController {
 
     @Autowired
@@ -52,7 +50,7 @@ public class DbUserController {
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 
-    @PostMapping("/sign-in")
+    @PostMapping("/login")
     public ResponseEntity<UserCredentialsResponse> signIn(@RequestBody DbUser data) {
         try {
             String username = data.getUsername();
